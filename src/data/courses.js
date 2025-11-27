@@ -83,10 +83,32 @@ export const COURSES = [
     theme: 'green',
     hero: {
       title: 'Become a Photo Wizard! 🧙‍♂️',
-      desc: 'Before you design, you must master the tools. Learn the 4 magic spells of image manipulation.',
+      desc: 'Before you design, you must master the tools. Learn the essential spells of image manipulation.',
       downloads: []
     },
     lessons: [
+      {
+        id: 'g0',
+        title: 'Meet Your Toolbox 🧰',
+        desc: 'Every wizard needs a wand, and every designer needs tools! Let\'s explore the magical toolbox that makes GIMP so powerful. These are your new best friends!',
+        color: 'orange',
+        demoComponent: 'DemoToolbox',
+        steps: [
+          '🖱️ Selection Tool - Draw boxes around things you want to edit',
+          '✋ Move Tool - Drag layers around like moving stickers',
+          '🖌️ Paintbrush - Paint colors anywhere on your image',
+          '🧽 Eraser - Remove pixels (careful, it\'s permanent!)',
+          '✂️ Free Select - Cut out shapes like scissors',
+          '🪄 Magic Wand - Select similar colors with one click'
+        ],
+        quiz: {
+          question: 'Which tool would you use to move a logo to a different spot?',
+          options: [
+            { text: 'The Move Tool (cross arrows).', correct: true },
+            { text: 'The Paintbrush Tool.', correct: false }
+          ]
+        }
+      },
       {
         id: 'g1',
         title: 'The Shrink Ray (Scaling)',

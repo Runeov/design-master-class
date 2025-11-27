@@ -1,5 +1,62 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ImageIcon, Package, RotateCw, Type } from 'lucide-react';
+import { ImageIcon, Package, RotateCw, Type, Move, Paintbrush, Eraser, MousePointer2, Scissors, Wand2 } from 'lucide-react';
+
+export const DemoToolbox = () => {
+  const [activeTool, setActiveTool] = useState(null);
+  
+  const tools = [
+    { id: 'select', icon: MousePointer2, name: 'Selection', desc: 'Click and drag to select parts of your image. Like drawing a box around what you want to work with!', color: 'blue' },
+    { id: 'move', icon: Move, name: 'Move Tool', desc: 'Drag layers around like moving stickers on a page. Cross arrows = Move!', color: 'green' },
+    { id: 'brush', icon: Paintbrush, name: 'Paintbrush', desc: 'Paint colors on your image. Choose any color and brush size you want!', color: 'purple' },
+    { id: 'eraser', icon: Eraser, name: 'Eraser', desc: 'Removes pixels permanently. Be careful - this cannot be undone easily!', color: 'red' },
+    { id: 'scissors', icon: Scissors, name: 'Free Select', desc: 'Draw around objects to select them. Like cutting out shapes from paper!', color: 'orange' },
+    { id: 'wand', icon: Wand2, name: 'Magic Wand', desc: 'Click to select all similar colors at once. Magic for removing backgrounds!', color: 'indigo' },
+  ];
+
+  const colorMap = {
+    blue: 'bg-blue-500 ring-blue-300',
+    green: 'bg-green-500 ring-green-300',
+    purple: 'bg-purple-500 ring-purple-300',
+    red: 'bg-red-500 ring-red-300',
+    orange: 'bg-orange-500 ring-orange-300',
+    indigo: 'bg-indigo-500 ring-indigo-300',
+  };
+
+  return (
+    <div className="flex flex-col items-center w-full">
+      <div className="grid grid-cols-3 gap-2 mb-4 w-full">
+        {tools.map((tool) => {
+          const Icon = tool.icon;
+          const isActive = activeTool === tool.id;
+          return (
+            <button
+              key={tool.id}
+              onClick={() => setActiveTool(isActive ? null : tool.id)}
+              className={`p-3 rounded-xl border-2 transition-all duration-200 flex flex-col items-center gap-1
+                ${isActive
+                  ? `${colorMap[tool.color]} text-white ring-4 scale-105 border-transparent`
+                  : 'bg-white border-slate-200 hover:border-slate-300 text-slate-600 hover:scale-102'}`}
+            >
+              <Icon size={24} />
+              <span className="text-[10px] font-bold uppercase tracking-wide">{tool.name.split(' ')[0]}</span>
+            </button>
+          );
+        })}
+      </div>
+      <div className={`w-full p-4 rounded-xl border-2 transition-all duration-300 min-h-[80px] flex items-center justify-center
+        ${activeTool ? 'bg-slate-50 border-slate-200' : 'bg-slate-100 border-dashed border-slate-300'}`}>
+        {activeTool ? (
+          <div className="text-center">
+            <p className="font-bold text-slate-700 mb-1">{tools.find(t => t.id === activeTool)?.name}</p>
+            <p className="text-sm text-slate-500">{tools.find(t => t.id === activeTool)?.desc}</p>
+          </div>
+        ) : (
+          <p className="text-slate-400 text-sm font-medium">👆 Click a tool to learn about it!</p>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export const DemoScale = () => {
   const [scale, setScale] = useState(1);

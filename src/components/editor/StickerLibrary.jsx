@@ -1,128 +1,25 @@
 import React from 'react';
 
-// Placeholder stickers using emoji and SVG data URLs
+// Stickers using emoji characters - will be rendered as Fabric.js Text objects
 const STICKERS = [
-  {
-    id: 'wolf',
-    name: 'Wolf',
-    emoji: '🐺',
-    // Simple wolf silhouette SVG
-    url: 'data:image/svg+xml,' + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-        <text x="50" y="70" font-size="60" text-anchor="middle">🐺</text>
-      </svg>
-    `),
-  },
-  {
-    id: 'shield',
-    name: 'Shield',
-    emoji: '🛡️',
-    url: 'data:image/svg+xml,' + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-        <text x="50" y="70" font-size="60" text-anchor="middle">🛡️</text>
-      </svg>
-    `),
-  },
-  {
-    id: 'star',
-    name: 'Star',
-    emoji: '⭐',
-    url: 'data:image/svg+xml,' + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-        <text x="50" y="70" font-size="60" text-anchor="middle">⭐</text>
-      </svg>
-    `),
-  },
-  {
-    id: 'heart',
-    name: 'Heart',
-    emoji: '❤️',
-    url: 'data:image/svg+xml,' + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-        <text x="50" y="70" font-size="60" text-anchor="middle">❤️</text>
-      </svg>
-    `),
-  },
-  {
-    id: 'lightning',
-    name: 'Lightning',
-    emoji: '⚡',
-    url: 'data:image/svg+xml,' + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-        <text x="50" y="70" font-size="60" text-anchor="middle">⚡</text>
-      </svg>
-    `),
-  },
-  {
-    id: 'crown',
-    name: 'Crown',
-    emoji: '👑',
-    url: 'data:image/svg+xml,' + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-        <text x="50" y="70" font-size="60" text-anchor="middle">👑</text>
-      </svg>
-    `),
-  },
-  {
-    id: 'fire',
-    name: 'Fire',
-    emoji: '🔥',
-    url: 'data:image/svg+xml,' + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-        <text x="50" y="70" font-size="60" text-anchor="middle">🔥</text>
-      </svg>
-    `),
-  },
-  {
-    id: 'rocket',
-    name: 'Rocket',
-    emoji: '🚀',
-    url: 'data:image/svg+xml,' + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-        <text x="50" y="70" font-size="60" text-anchor="middle">🚀</text>
-      </svg>
-    `),
-  },
-  {
-    id: 'diamond',
-    name: 'Diamond',
-    emoji: '💎',
-    url: 'data:image/svg+xml,' + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-        <text x="50" y="70" font-size="60" text-anchor="middle">💎</text>
-      </svg>
-    `),
-  },
-  {
-    id: 'gamepad',
-    name: 'Gaming',
-    emoji: '🎮',
-    url: 'data:image/svg+xml,' + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-        <text x="50" y="70" font-size="60" text-anchor="middle">🎮</text>
-      </svg>
-    `),
-  },
-  {
-    id: 'sword',
-    name: 'Sword',
-    emoji: '⚔️',
-    url: 'data:image/svg+xml,' + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-        <text x="50" y="70" font-size="60" text-anchor="middle">⚔️</text>
-      </svg>
-    `),
-  },
-  {
-    id: 'music',
-    name: 'Music',
-    emoji: '🎵',
-    url: 'data:image/svg+xml,' + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-        <text x="50" y="70" font-size="60" text-anchor="middle">🎵</text>
-      </svg>
-    `),
-  },
+  { id: 'wolf', name: 'Wolf', emoji: '🐺' },
+  { id: 'shield', name: 'Shield', emoji: '🛡️' },
+  { id: 'star', name: 'Star', emoji: '⭐' },
+  { id: 'heart', name: 'Heart', emoji: '❤️' },
+  { id: 'lightning', name: 'Lightning', emoji: '⚡' },
+  { id: 'crown', name: 'Crown', emoji: '👑' },
+  { id: 'fire', name: 'Fire', emoji: '🔥' },
+  { id: 'rocket', name: 'Rocket', emoji: '🚀' },
+  { id: 'diamond', name: 'Diamond', emoji: '💎' },
+  { id: 'gamepad', name: 'Gaming', emoji: '🎮' },
+  { id: 'sword', name: 'Sword', emoji: '⚔️' },
+  { id: 'music', name: 'Music', emoji: '🎵' },
+  { id: 'skull', name: 'Skull', emoji: '💀' },
+  { id: 'ghost', name: 'Ghost', emoji: '👻' },
+  { id: 'alien', name: 'Alien', emoji: '👽' },
+  { id: 'robot', name: 'Robot', emoji: '🤖' },
+  { id: 'unicorn', name: 'Unicorn', emoji: '🦄' },
+  { id: 'dragon', name: 'Dragon', emoji: '🐉' },
 ];
 
 export default function StickerLibrary({ onSelectSticker, isCompact = false }) {
@@ -135,7 +32,7 @@ export default function StickerLibrary({ onSelectSticker, isCompact = false }) {
         {STICKERS.map((sticker) => (
           <button
             key={sticker.id}
-            onClick={() => onSelectSticker(sticker.url)}
+            onClick={() => onSelectSticker(sticker.emoji)}
             className={`aspect-square bg-white border-2 border-slate-200 rounded-xl flex items-center justify-center hover:border-purple-400 hover:bg-purple-50 hover:scale-105 transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 ${isCompact ? 'text-2xl' : 'text-3xl'}`}
             title={sticker.name}
           >

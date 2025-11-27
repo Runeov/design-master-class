@@ -160,27 +160,27 @@ const EditorCanvas = forwardRef(({ activeTool }, ref) => {
 
   // Expose methods to parent component
   useImperativeHandle(ref, () => ({
-    addSticker: (stickerUrl) => {
+    addSticker: (emoji) => {
       if (!fabricRef.current) return;
       
-      fabric.FabricImage.fromURL(stickerUrl, { crossOrigin: 'anonymous' }).then((img) => {
-        img.scaleToWidth(80);
-        img.set({
-          left: CANVAS_WIDTH / 2 - 40,
-          top: 150,
-          cornerStyle: 'circle',
-          cornerColor: '#6366f1',
-          cornerStrokeColor: '#ffffff',
-          borderColor: '#6366f1',
-          transparentCorners: false,
-        });
-        fabricRef.current.add(img);
-        fabricRef.current.setActiveObject(img);
-        fabricRef.current.renderAll();
-        saveToHistory();
-      }).catch(err => {
-        console.error('Error loading sticker:', err);
+      // Create emoji as a Text object - this renders properly in Fabric.js
+      const stickerText = new fabric.FabricText(emoji, {
+        left: CANVAS_WIDTH / 2,
+        top: 150,
+        fontSize: 60,
+        originX: 'center',
+        originY: 'center',
+        cornerStyle: 'circle',
+        cornerColor: '#6366f1',
+        cornerStrokeColor: '#ffffff',
+        borderColor: '#6366f1',
+        transparentCorners: false,
       });
+      
+      fabricRef.current.add(stickerText);
+      fabricRef.current.setActiveObject(stickerText);
+      fabricRef.current.renderAll();
+      saveToHistory();
     },
 
     addText: ({ text, color, size, font }) => {

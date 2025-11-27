@@ -263,6 +263,20 @@ const EditorCanvas = forwardRef(({ activeTool }, ref) => {
       link.click();
       document.body.removeChild(link);
     },
+
+    // Get texture data URL for 3D preview
+    getTextureDataUrl: () => {
+      if (!fabricRef.current) return null;
+      
+      return fabricRef.current.toDataURL({
+        format: 'png',
+        quality: 1,
+        multiplier: 1,
+      });
+    },
+
+    // Get the Fabric canvas instance for real-time updates
+    getCanvas: () => fabricRef.current,
   }), [saveToHistory]);
 
   return (

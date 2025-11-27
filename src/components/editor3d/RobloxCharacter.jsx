@@ -4,7 +4,7 @@ import * as THREE from 'three';
 
 // Simple Roblox-style character made with basic shapes
 // This is a placeholder until we have a proper GLB model
-export default function RobloxCharacter({ textureDataUrl, onLoaded }) {
+export function RobloxCharacter({ textureDataUrl, onLoaded, bodyColor }) {
   const groupRef = useRef();
   const torsoMeshRef = useRef();
   const leftSleeveRef = useRef();
@@ -69,11 +69,11 @@ export default function RobloxCharacter({ textureDataUrl, onLoaded }) {
   // Default material for body parts without texture
   const skinMaterial = useMemo(() => {
     return new THREE.MeshStandardMaterial({
-      color: '#FFD5B8', // Skin tone
+      color: bodyColor || '#FFD5B8', // Skin tone
       roughness: 0.8,
       metalness: 0.1,
     });
-  }, []);
+  }, [bodyColor]);
 
   // Pants material
   const pantsMaterial = useMemo(() => {
@@ -106,7 +106,7 @@ export default function RobloxCharacter({ textureDataUrl, onLoaded }) {
       {/* Head */}
       <mesh position={[0, 1.4, 0]} castShadow>
         <boxGeometry args={[0.8, 0.8, 0.8]} />
-        <meshStandardMaterial color="#FFD5B8" roughness={0.8} />
+        <meshStandardMaterial color={bodyColor || '#FFD5B8'} roughness={0.8} />
       </mesh>
 
       {/* Hair (simple block on top) */}
@@ -189,3 +189,5 @@ export default function RobloxCharacter({ textureDataUrl, onLoaded }) {
     </group>
   );
 }
+
+export default RobloxCharacter;

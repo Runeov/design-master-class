@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { Paintbrush, Shirt, CheckCircle, Palette, BookOpen, Box } from 'lucide-react';
+import { Paintbrush, Shirt, CheckCircle, Palette, BookOpen, Box, Crown } from 'lucide-react';
 import { COURSES } from './data/courses';
 import { getTheme } from './lib/theme';
 import LessonCard from './components/LessonCard';
 import { RobloxTShirtEditor } from './components/editor';
 import { ClothingEditor3D } from './components/editor3d';
+import { UGCEditor } from './components/editor3d/accessories';
 
 export default function App() {
   const [activeCourseId, setActiveCourseId] = useState(COURSES[0].id);
-  const [activeView, setActiveView] = useState('lessons'); // 'lessons', 'editor', or 'editor3d'
+  const [activeView, setActiveView] = useState('lessons'); // 'lessons', 'editor', 'editor3d', or 'ugc'
   const activeCourse = COURSES.find(c => c.id === activeCourseId) || COURSES[0];
   const themeStyles = getTheme(activeCourse.theme);
 
@@ -60,6 +61,16 @@ export default function App() {
             >
               <Box size={16} /> 3D Create
             </button>
+            <button
+              onClick={() => setActiveView('ugc')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full font-bold text-sm transition-all ${
+                activeView === 'ugc'
+                  ? 'bg-gradient-to-r from-yellow-500 to-amber-500 text-white shadow-sm'
+                  : 'text-slate-500 hover:bg-white/50'
+              }`}
+            >
+              <Crown size={16} /> UGC Items
+            </button>
           </div>
 
           {/* Course Navigation - only show in lessons view */}
@@ -86,6 +97,11 @@ export default function App() {
       {/* 3D Editor View */}
       {activeView === 'editor3d' && (
         <ClothingEditor3D />
+      )}
+
+      {/* UGC Editor View */}
+      {activeView === 'ugc' && (
+        <UGCEditor />
       )}
 
       {/* Lessons View */}
